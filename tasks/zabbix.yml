@@ -1,0 +1,64 @@
+- name: create dirs
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: root
+    group: root
+  with_items:
+    - /opt/zabbix_scripts/
+    - /etc/zabbix/zabbix_agentd.d
+
+- name: manage nginx.sh
+  template:
+    src: 'templates/{{ item }}'
+    dest: '/opt/zabbix_scripts/{{ item }}'
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - nginx.sh
+  notify: 'restart zabbix-agent'
+
+- name: manage zabbix nginx userparameter
+  template:
+    src: 'templates/userparameter_nginx.conf'
+    dest: '{{ zabbix_dir }}/userparameter_nginx.conf'
+    owner: root
+    group: root
+    mode: 0644
+  notify: 'restart zabbix-agent'
+
+- name: Import Zabbix json template configuration
+  local_action:
+    module: zabbix_template
+    server_url: '{{ zabbix_url }}'
+    login_user: '{{ zabbix_user}}'
+    login_password: '{{ zabbix_pass }}'
+    template_name: Template App Nginx
+    template_json: '{{ lookup("file", "templates/zabbix_nginx.json") }}'
+    template_groups:
+      - Templates
+    state: present
+  ignore_errors: yes
+
+- name: Link host to template
+  local_action:
+    module: zabbix_host
+    server_url: '{{ zabbix_url }}'
+    login_user: '{{ zabbix_user}}'
+    login_password: '{{ zabbix_pass }}'
+    host_name: '{{ ansible_fqdn }}'
+    force: no
+    link_templates:
+      - Template App Nginx
+  ignore_errors: yes
+
+- name: manage nginx config
+  template:
+    src: templates/localhost.conf
+    dest: /etc/nginx/conf.d/localhost.conf
+    owner: '{{ nginx_conf.user }}'
+    group: '{{ nginx_conf.user }}'
+    mode: 0644
+  notify:
+    - nginx restart

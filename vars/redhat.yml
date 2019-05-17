@@ -1,0 +1,19 @@
+---
+nginx:
+  repos:
+    nginx_repo:
+      name: 'nginx'
+      baseurl: 'http://nginx.org/packages/centos/7/$basearch/'
+  packages:
+    - nginx
+    - certbot
+    - epel-release
+    - python2-certbot-nginx
+    - nginx-module-geoip
+    - nginx-module-image-filter
+    - nginx-module-njs
+    - nginx-module-perl
+    - nginx-module-xslt
+  services:
+    - nginx
+  zabbix_dir: /etc/zabbix/zabbix_agentd.d

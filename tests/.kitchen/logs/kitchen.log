@@ -1,0 +1,28 @@
+E, [2018-09-28T14:30:00.552822 #22604] ERROR -- Kitchen: ------Exception-------
+E, [2018-09-28T14:30:00.552974 #22604] ERROR -- Kitchen: Class: Kitchen::UserError
+E, [2018-09-28T14:30:00.553009 #22604] ERROR -- Kitchen: Message: Kitchen YAML file /Users/evilgn0me/work/nginx-role/tests/.kitchen.yml does not exist.
+E, [2018-09-28T14:30:00.553036 #22604] ERROR -- Kitchen: ----------------------
+E, [2018-09-28T14:30:00.553060 #22604] ERROR -- Kitchen: ------Backtrace-------
+E, [2018-09-28T14:30:00.553083 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/loader/yaml.rb:65:in `read'
+E, [2018-09-28T14:30:00.553106 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/config.rb:152:in `data'
+E, [2018-09-28T14:30:00.553130 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/config.rb:131:in `suites'
+E, [2018-09-28T14:30:00.553153 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/config.rb:182:in `filter_instances'
+E, [2018-09-28T14:30:00.553176 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/config.rb:141:in `build_instances'
+E, [2018-09-28T14:30:00.553199 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/config.rb:117:in `instances'
+E, [2018-09-28T14:30:00.553222 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/command.rb:112:in `filtered_instances'
+E, [2018-09-28T14:30:00.553245 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/command.rb:142:in `parse_subcommand'
+E, [2018-09-28T14:30:00.553268 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/command/login.rb:29:in `call'
+E, [2018-09-28T14:30:00.553291 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/cli.rb:52:in `perform'
+E, [2018-09-28T14:30:00.553314 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/cli.rb:252:in `login'
+E, [2018-09-28T14:30:00.553337 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/thor-0.20.0/lib/thor/command.rb:27:in `run'
+E, [2018-09-28T14:30:00.553360 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/thor-0.20.0/lib/thor/invocation.rb:126:in `invoke_command'
+E, [2018-09-28T14:30:00.553383 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/thor-0.20.0/lib/thor.rb:387:in `dispatch'
+E, [2018-09-28T14:30:00.553406 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/thor-0.20.0/lib/thor/base.rb:466:in `start'
+E, [2018-09-28T14:30:00.553428 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/bin/kitchen:13:in `block in <top (required)>'
+E, [2018-09-28T14:30:00.553451 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/lib/kitchen/errors.rb:171:in `with_friendly_errors'
+E, [2018-09-28T14:30:00.553474 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/gems/test-kitchen-1.21.2/bin/kitchen:13:in `<top (required)>'
+E, [2018-09-28T14:30:00.553497 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/bin/kitchen:23:in `load'
+E, [2018-09-28T14:30:00.553520 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/bin/kitchen:23:in `<main>'
+E, [2018-09-28T14:30:00.553542 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/bin/ruby_executable_hooks:15:in `eval'
+E, [2018-09-28T14:30:00.553565 #22604] ERROR -- Kitchen: /Users/evilgn0me/.rvm/gems/ruby-2.5.1/bin/ruby_executable_hooks:15:in `<main>'
+E, [2018-09-28T14:30:00.553587 #22604] ERROR -- Kitchen: ----End Backtrace-----

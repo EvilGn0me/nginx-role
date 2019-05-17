@@ -1,0 +1,16 @@
+---
+- name: nginx restart
+  service:
+    name: '{{ item }}'
+    state: restarted
+    enabled: yes
+  with_items:
+  - '{{ nginx.services }}'
+
+- name: restart zabbix-agent
+  service:
+    name: '{{ item }}'
+    state: restarted
+    enabled: yes
+  with_items:
+    - zabbix-agent

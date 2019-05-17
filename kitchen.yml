@@ -1,0 +1,34 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+  socker: unix:///var/run/docker.sock
+
+provisioner:
+  name: ansible_playbook
+  require_ansible_repo: true
+  ansible_verbose: true
+  ansible_version: latest
+  ansible_verbosity: 4
+  ansible_inventory: tests/inventory
+  require_chef_for_busser: false
+  playbook: tests/test.yml
+
+platforms:
+  - name: centos-7
+    driver_config:
+      run_command: /sbin/init 5
+      privileged: true
+      provision_command:
+        - yum -y install epel-release git crontabs unzip iproute
+        - yum -y install python-pip
+
+verifier:
+  name: serverspec
+
+suites:
+  - name: nginx
+    verifier:
+      default_path: '/tmp/kitchen/roles/nginx-role/tests'
+      patterns:
+        - spec/nginx/nginx_spec.rb

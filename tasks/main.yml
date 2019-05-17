@@ -1,0 +1,62 @@
+---
+# tasks file for nginx
+- name: Load a variable file based on the OS type.
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_distribution|lower }}.yml'
+    - '{{ ansible_os_family|lower }}.yml'
+
+- name: add repositories for nginx
+  yum_repository:
+    name: '{{ item.value.name }}'
+    baseurl: '{{ item.value.baseurl }}'
+    description: Repo managed by Ansible
+    gpgcheck: no
+  with_dict: '{{ nginx.repos }}'
+
+- name: install nginx packages
+  yum:
+    name: '{{ nginx.packages }}'
+    state: latest
+
+- name: zabbix agent tasks
+  import_tasks: zabbix.yml
+  when: zabbix_url is defined
+
+- name: manage user for nginx
+  user:
+    name: '{{ nginx_conf.user }}'
+    shell: '{{ nginx_conf.user_shell }}'
+    state: present
+
+- cron:
+    name: 'certbot renew'
+    minute: '0'
+    hour: '0'
+    user: root
+    job: '/usr/bin/certbot renew'
+
+- name: remove default nginx config
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+
+- name: manage nginx config
+  template:
+    src: templates/localhost.conf
+    dest: /etc/nginx/conf.d/localhost.conf
+    owner: '{{ nginx_conf.user }}'
+    group: '{{ nginx_conf.user }}'
+    mode: 0644
+  notify:
+    - nginx restart
+
+- name: manage nginx config
+  template:
+    src: templates/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: '{{ nginx_conf.user }}'
+    group: '{{ nginx_conf.user }}'
+    mode: 0644
+  notify:
+    - nginx restart
