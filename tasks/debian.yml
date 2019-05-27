@@ -1,0 +1,13 @@
+- name: add keys for nginx repo
+  shell: 'curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -'
+
+- name: add repositories for nginx
+  apt_repository:
+    repo: '{{ item.value.repo }}'
+  with_dict: '{{ nginx.repos }}'
+
+- name: install nginx packages
+  yum:
+    name: '{{ nginx.packages }}'
+    state: latest
+    update_cache: yes

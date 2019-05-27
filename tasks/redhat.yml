@@ -1,0 +1,12 @@
+- name: add repositories for nginx
+  apt_repository:
+    name: '{{ item.value.name }}'
+    baseurl: '{{ item.value.baseurl }}'
+    description: Repo managed by Ansible
+    gpgcheck: no
+  with_dict: '{{ nginx.repos }}'
+
+- name: install nginx packages
+  yum:
+    name: '{{ nginx.packages }}'
+    state: latest

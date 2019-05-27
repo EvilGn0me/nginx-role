@@ -6,18 +6,13 @@
     - '{{ ansible_distribution|lower }}.yml'
     - '{{ ansible_os_family|lower }}.yml'
 
-- name: add repositories for nginx
-  yum_repository:
-    name: '{{ item.value.name }}'
-    baseurl: '{{ item.value.baseurl }}'
-    description: Repo managed by Ansible
-    gpgcheck: no
-  with_dict: '{{ nginx.repos }}'
+- name: pre-requisites tasks
+  import_tasks: redhat.yml
+  when: ansible_os_family|lower == 'redhat'
 
-- name: install nginx packages
-  yum:
-    name: '{{ nginx.packages }}'
-    state: latest
+- name: pre-requisites tasks
+  import_tasks: debian.yml
+  when: ansible_os_family|lower == 'debian'
 
 - name: zabbix agent tasks
   import_tasks: zabbix.yml

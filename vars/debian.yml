@@ -1,0 +1,19 @@
+---
+nginx:
+  repos:
+    nginx_repo:
+      repo: 'deb http://nginx.org/packages/mainline/{{ ansible_lsb.id|lower }} {{ ansible_lsb.codename }} nginx'
+    certbot_repo:
+      repo: 'ppa:certbot/certbot'
+  packages:
+    - nginx
+    - certbot
+    - python-certbot-nginx
+    - nginx-module-geoip
+    - nginx-module-image-filter
+    - nginx-module-njs
+    - nginx-module-perl
+    - nginx-module-xslt
+  services:
+    - nginx
+  zabbix_dir: /etc/zabbix/zabbix_agentd.d
