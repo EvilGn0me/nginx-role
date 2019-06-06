@@ -1,5 +1,5 @@
 - name: add repositories for nginx
-  apt_repository:
+  yum_repository:
     name: '{{ item.value.name }}'
     baseurl: '{{ item.value.baseurl }}'
     description: Repo managed by Ansible
