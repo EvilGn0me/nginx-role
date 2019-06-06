@@ -36,13 +36,15 @@
     path: /etc/nginx/conf.d/default.conf
     state: absent
 
-- name: manage nginx config
+- name: manage sites config
   template:
-    src: templates/localhost.conf
-    dest: /etc/nginx/conf.d/localhost.conf
+    src: templates/site_template.conf
+    dest: /etc/nginx/conf.d/{{ item }}.conf
     owner: '{{ nginx_conf.user }}'
     group: '{{ nginx_conf.user }}'
     mode: 0644
+  with_dict:
+    '{{ nginx_conf.sites }}'
   notify:
     - nginx restart
 

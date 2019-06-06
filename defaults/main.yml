@@ -20,3 +20,7 @@ nginx_conf:
     - 'sendfile on'
     - 'tcp_nopush on'
     - 'tcp_nodelay off'
+  sites:
+    localhost:
+      hostname: 'localhost'
+      stub: True
