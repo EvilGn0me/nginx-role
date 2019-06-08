@@ -36,10 +36,16 @@
     path: /etc/nginx/conf.d/default.conf
     state: absent
 
+- name: generate ssl certificates
+  shell: bash -lc 'certbot certonly --standalone -n --agree-tos --email postmaster@{{ item.value.hostname }} --domains {{ item.value.hostname }} --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"'
+  when: item.value.ssl == True
+  with_dict:
+    '{{ nginx_conf.sites }}'
+
 - name: manage sites config
   template:
     src: templates/site_template.conf
-    dest: /etc/nginx/conf.d/{{ item }}.conf
+    dest: /etc/nginx/conf.d/{{ item.value.hostname }}.conf
     owner: '{{ nginx_conf.user }}'
     group: '{{ nginx_conf.user }}'
     mode: 0644

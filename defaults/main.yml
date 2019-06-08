@@ -23,4 +23,6 @@ nginx_conf:
   sites:
     localhost:
       hostname: 'localhost'
+      ssl: False
       stub: True
+      proxyhost:
