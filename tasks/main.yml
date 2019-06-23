@@ -42,6 +42,16 @@
   with_dict:
     '{{ nginx_conf.sites }}'
 
+- name: create directory for sites
+  file:
+    path: '/var/www/{{ item.value.hostname }}'
+    owner: '{{ nginx_conf.user }}'
+    group: '{{ nginx_conf.user }}'
+    state: directory
+  when: item.value.wordpress == True
+  with_dict:
+    '{{ nginx_conf.sites }}'
+
 - name: manage sites config
   template:
     src: templates/site_template.conf
