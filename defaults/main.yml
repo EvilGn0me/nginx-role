@@ -26,3 +26,4 @@ nginx_conf:
       ssl: False
       stub: True
       proxyhost:
+      wordpress: False
