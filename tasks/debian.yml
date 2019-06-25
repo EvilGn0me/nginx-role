@@ -1,5 +1,7 @@
 - name: add keys for nginx repo
-  shell: 'curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -'
+  apt_key:
+    url: 'https://nginx.org/keys/nginx_signing.key'
+    state: present
 
 - name: add repositories for nginx
   apt_repository:
