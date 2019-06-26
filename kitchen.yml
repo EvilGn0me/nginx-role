@@ -4,6 +4,9 @@ driver:
   use_sudo: false
   socker: unix:///var/run/docker.sock
 
+transport:
+  name: speedy_ssh
+
 provisioner:
   name: ansible_playbook
   require_ansible_repo: true
