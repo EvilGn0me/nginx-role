@@ -42,6 +42,13 @@
   with_dict:
     '{{ nginx_conf.sites }}'
 
+- name: manage conf directory
+  file:
+    path: '{{ nginx.conf_dir}}'
+    owner: '{{ nginx_conf.user }}'
+    group: '{{ nginx_conf.user }}'
+    state: directory
+
 - name: create directory for sites
   file:
     path: '/var/www/{{ item.value.hostname }}'
