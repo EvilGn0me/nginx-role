@@ -1,5 +1,6 @@
 ---
 nginx:
+  conf_dir: '/etc/nginx/conf.d/'
   repos:
     nginx_repo:
       name: 'nginx'

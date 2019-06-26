@@ -48,14 +48,14 @@
     owner: '{{ nginx_conf.user }}'
     group: '{{ nginx_conf.user }}'
     state: directory
-  when: item.value.wordpress == True
+  when: ( item.value.wordpress is defined and item.value.wordpress == True )
   with_dict:
     '{{ nginx_conf.sites }}'
 
 - name: manage sites config
   template:
-    src: templates/site_template.conf
-    dest: /etc/nginx/conf.d/{{ item.value.hostname }}.conf
+    src: templates/site_template.conf.j2
+    dest: '{{ nginx.conf_dir }}/{{ item.key }}.conf'
     owner: '{{ nginx_conf.user }}'
     group: '{{ nginx_conf.user }}'
     mode: 0644
@@ -64,9 +64,19 @@
   notify:
     - nginx restart
 
+- name: manage mime types
+  template:
+    src: templates/mime.types
+    dest: /etc/nginx/mime.types
+    owner: '{{ nginx_conf.user }}'
+    group: '{{ nginx_conf.user }}'
+    mode: 0644
+  notify:
+    - nginx restart
+
 - name: manage nginx config
   template:
-    src: templates/nginx.conf
+    src: templates/nginx.conf.j2
     dest: /etc/nginx/nginx.conf
     owner: '{{ nginx_conf.user }}'
     group: '{{ nginx_conf.user }}'

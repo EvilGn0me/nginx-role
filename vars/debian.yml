@@ -1,5 +1,6 @@
 ---
 nginx:
+  conf_dir: '/etc/nginx/conf.d/'
   repos:
     nginx_repo:
       repo: 'deb http://nginx.org/packages/mainline/{{ ansible_lsb.id|lower }} {{ ansible_lsb.codename }} nginx'

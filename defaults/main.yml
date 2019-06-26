@@ -1,11 +1,13 @@
 ---
 # defaults file for nginx
 nginx_conf:
+  pidfile: '/var/run/nginx.pid'
   user: 'nginx'
   user_shell: '/sbin/nologin'
   worker_processes: '4'
   worker_priority: '0'
   worker_connections: '1024'
+  worker_rlimit_nofile: '65535'
   multi_accept: 'on'
   keepalive: '60'
   keepalive_requests: '1000'

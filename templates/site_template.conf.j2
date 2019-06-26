@@ -1,3 +1,4 @@
+# {{ ansible_managed }}
 server {
     listen       80;
     server_name  {{ item.value.hostname }};
@@ -14,7 +15,7 @@ server {
 
     {% endif %}
 
-    {% if item.value.stub == True %}
+    {% if item.value.stub is defined and item.value.stub == True %}
     location /stub_status {
         stub_status on;
         access_log off;
@@ -23,7 +24,7 @@ server {
     }
     {% endif %}
 
-    {% if item.value.proxyhost %}
+    {% if item.value.proxyhost is defined and item.value.proxyhost != None %}
     client_max_body_size 20m;
 
     location / {
@@ -40,7 +41,7 @@ server {
        proxy_pass              http://{{ item.value.proxyhost }};
     }
     {% endif %}
-    {% if item.value.wordpress == True %}
+    {% if item.value.wordpress is defined and item.value.wordpress == True %}
     root /var/www/{{ item.value.hostname }};
     location ~ /\. {
                 deny all;

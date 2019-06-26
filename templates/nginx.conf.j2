@@ -1,5 +1,6 @@
+# {{ ansible_managed }}
 user  {{ nginx_conf.user }};
-worker_rlimit_nofile 65535;
+worker_rlimit_nofile {{ nginx_conf.worker_rlimit_nofile }};
 worker_processes  {{ nginx_conf.worker_processes }};
 worker_priority {{ nginx_conf.worker_priority }};
 
@@ -8,7 +9,7 @@ load_module "{{ nginx_conf.modules|join('";\nload_module "') }}";
 {% endif %}
 
 error_log  {{ nginx_conf.error_log }} warn;
-pid        /var/run/nginx.pid;
+pid        {{ nginx_conf.pidfile }};
 
 
 events {
@@ -30,9 +31,11 @@ http {
     keepalive_timeout  {{ nginx_conf.keepalive }};
     keepalive_requests  {{ nginx_conf.keepalive_requests }};
 
-    {% if nginx_conf.http_opts %}
+    {% if nginx_conf.http_opts -%}
     {{ nginx_conf.http_opts|join(';\n    ') }};
     {% endif %}
 
-    include /etc/nginx/conf.d/*.conf;
+    {% for site in nginx_conf.sites %}
+    include /etc/nginx/conf.d/{{ site }}.conf;
+    {% endfor %}
 }

@@ -1,2 +1,11 @@
-localhost
-
+test:
+  hosts:
+    localhost:
+      ansible_host: 127.0.0.1
+  vars:
+    nginx_conf:
+      sites:
+        test:
+          hostname: 'test.example.com'
+          ssl: False
+          stub: True

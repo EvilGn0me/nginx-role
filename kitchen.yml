@@ -14,6 +14,10 @@ provisioner:
   ansible_version: latest
   ansible_verbosity: 4
   ansible_inventory: tests/inventory
+  ansible_cfg_path: tests/ansible.cfg
+  idempotency_test: true
+  fail_non_idempotent: true
+  sudo_command: sudo -E -H
   require_chef_for_busser: false
   playbook: tests/test.yml
 
