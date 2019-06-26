@@ -44,7 +44,7 @@
 
 - name: manage conf directory
   file:
-    path: '{{ nginx.conf_dir}}'
+    path: '{{ nginx.conf_dir }}'
     owner: '{{ nginx_conf.user }}'
     group: '{{ nginx_conf.user }}'
     state: directory
