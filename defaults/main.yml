@@ -23,7 +23,7 @@ nginx_conf:
     - 'tcp_nopush on'
     - 'tcp_nodelay off'
   sites:
-    localhost:
+    default:
       hostname: 'localhost'
       ssl: False
       stub: True
